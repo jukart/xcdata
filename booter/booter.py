@@ -24,7 +24,9 @@ def activate_settings(button, params):
 
 
 def update_data(button, params):
-    call(['git', 'status'])
+    proc = subprocess.Popen(['git', 'status'], stdout=subprocess.PIPE)
+    (out, err) = proc.communicate()
+    print out
 
 
 def exit(button, params):
