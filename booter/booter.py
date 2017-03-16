@@ -1,4 +1,5 @@
 from subprocess import call
+import subprocess
 import urwid
 
 from ipdetect import get_ip_address
@@ -24,9 +25,9 @@ def activate_settings(button, params):
 
 
 def update_data(button, params):
-    proc = subprocess.Popen(['git', 'status'], stdout=subprocess.PIPE)
+    proc = subprocess.Popen(['git', 'pull'], stdout=subprocess.PIPE)
     (out, err) = proc.communicate()
-    print out
+    # print out
 
 
 def exit(button, params):
