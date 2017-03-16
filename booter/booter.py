@@ -1,5 +1,7 @@
+import json
 from subprocess import call
 import subprocess
+
 import urwid
 
 from ipdetect import get_ip_address
@@ -21,7 +23,10 @@ def simulator(button, params):
 
 
 def activate_settings(button, params):
-    pass
+    proc = subprocess.Popen(['fab', 'xcsoar.list'], stdout=subprocess.PIPE)
+    (out, err) = proc.communicate()
+    settings = json.loads(out.split('\n')[0])
+    print settings
 
 
 def update_data(button, params):
@@ -58,7 +63,27 @@ def menu(title, choices):
             body.append(urwid.AttrMap(button, 'panel', focus_map='focus'))
     return urwid.ListBox(urwid.SimpleFocusListWalker(body))
 
-footer = urwid.Text('wlan-ip: ' + get_ip_address('wlan0'))
+
+footer = urwid.Text('wlan-ip: waiting')
+
+ip = ''
+
+
+def update_ip(loop=None, user_data=None):
+    """Update the current in the footer
+    """
+    global footer, ip
+    current_ip = get_ip_address('wlan0')
+    if current_ip == '???':
+        ip += '.'
+        if len(ip) > 9:
+            ip = '.'
+        loop.set_alarm_in(1, update_ip)
+    else:
+        ip = current_ip
+        loop.set_alarm_in(10, update_ip)
+    footer.set_text('wlan-ip: %s' % ip)
+
 
 main = urwid.Frame(
     urwid.Padding(menu(u'LAK 17a / D - 5461', choices), left=1, right=1),
@@ -96,7 +121,12 @@ palette = [
 
 screen.register_palette(palette)
 
-urwid.MainLoop(
+loop = urwid.MainLoop(
     page,
     screen=screen,
-).run()
+)
+
+# start the ip updater in the footer
+update_ip(loop)
+
+loop.run()

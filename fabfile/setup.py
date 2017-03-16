@@ -1,0 +1,6 @@
+
+settings = {
+    "loih": {},
+    "sisteron": {},
+    "feldkirchen": {},
+}
