@@ -1,9 +1,9 @@
 from subprocess import call
-import subprocess
 
 import urwid
 
 import settings
+import run
 from ipdetect import get_ip_address
 
 
@@ -23,9 +23,7 @@ def simulator(button, params):
 
 
 def update_data(button, params):
-    proc = subprocess.Popen(['git', 'pull'], stdout=subprocess.PIPE)
-    (out, err) = proc.communicate()
-    # print out
+    run.run(['git', 'pull'], loop)
 
 
 def exit(button, params):
@@ -46,6 +44,10 @@ def popupCreator(popup):
     return create
 
 
+def getLoop():
+    return loop
+
+
 choices = [
     (u'Fly LAK-17a 18m', buttonCreator(fly_18m)),
     (u'Fly LAK-17a 15m', buttonCreator(fly_15m)),
@@ -55,7 +57,8 @@ choices = [
     (u'', None),
     (u'Simulator', buttonCreator(simulator)),
     (u'', None),
-    (u'Update Data', buttonCreator(update_data)),
+    (u'Update Data',
+     popupCreator(run.runCreator(['git', 'pull'], getLoop))),
     (u'Exit', buttonCreator(exit)),
 ]
 
@@ -77,7 +80,7 @@ ip = ''
 
 
 def update_ip(loop=None, user_data=None):
-    """Update the current in the footer
+    """Update the current ip in the footer
     """
     global footer, ip
     current_ip = get_ip_address('wlan0')
