@@ -47,8 +47,8 @@ class ButtonWithRunPopUp(urwid.PopUpLauncher):
         return {
             'left': 0,
             'top': 1,
-            'overlay_width': 80,
-            'overlay_height': 20,
+            'overlay_width': 76,
+            'overlay_height': 18,
         }
 
 

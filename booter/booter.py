@@ -57,7 +57,7 @@ choices = [
     (u'', None),
     (u'Simulator', buttonCreator(simulator)),
     (u'', None),
-    (u'Update Data',
+    (u'Update Data [via git pull]',
      popupCreator(run.runCreator(['git', 'pull'], getLoop))),
     (u'Exit', buttonCreator(exit)),
 ]
