@@ -100,9 +100,9 @@ page = urwid.Overlay(
     main,
     urwid.SolidFill(u'\N{MEDIUM SHADE}'),
     align='center',
-    width=('relative', 40),
+    width=('relative', 90),
     valign='middle',
-    height=('relative', 80),
+    height=('relative', 90),
     min_width=20,
     min_height=9,
 )
