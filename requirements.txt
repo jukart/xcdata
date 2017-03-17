@@ -1,2 +1,3 @@
 urwid
+cryptography
 fabric
