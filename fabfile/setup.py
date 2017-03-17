@@ -1,6 +1,0 @@
-
-settings = {
-    "loih": {},
-    "sisteron": {},
-    "feldkirchen": {},
-}
