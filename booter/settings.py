@@ -4,11 +4,13 @@ import subprocess
 
 import urwid
 
-
-SETTINGS_FILE = os.path.expanduser('~/.xcsoar/booter.json')
+BOOTER_BASE = os.path.expanduser('~/.xcsoar')
+BOOTER_SETTINGS_FILE = os.path.join(BOOTER_BASE, 'booter.json')
 
 ACTIVE_SETTINGS = {
-    'xcsoar_setting_name': '???'
+    'xcsoar_setting_name': 'not set',
+    'xcsoar': {
+    },
 }
 
 
@@ -18,9 +20,13 @@ def getSetting(name, default=None):
 
 
 def setSetting(name, value):
-    global ACTIVE_SETTINGS, SETTINGS_FILE
+    global ACTIVE_SETTINGS
     ACTIVE_SETTINGS[name] = value
-    with open(SETTINGS_FILE, 'w') as f:
+
+
+def commitSetting():
+    global BOOTER_SETTINGS_FILE
+    with open(BOOTER_SETTINGS_FILE, 'w') as f:
         f.write(json.dumps(ACTIVE_SETTINGS))
 
 
@@ -48,6 +54,7 @@ class SettingsSelectorPopUp(urwid.WidgetWrap):
     def settingSelected(self, button, params):
         global ACTIVE_SETTINGS
         setSetting('xcsoar_setting_name', button.get_label())
+        commitSetting()
         self._emit("close")
 
 
@@ -57,7 +64,7 @@ class ButtonWithSettingsSelectorPopUp(urwid.PopUpLauncher):
         global ACTIVE_SETTINGS
         self.original_label = thing.get_label()
         thing.set_label(
-            self.original_label % getSetting('xcsoar_setting_name', '???'))
+            self.original_label % getSetting('xcsoar_setting_name', ''))
         self.__super.__init__(thing)
         urwid.connect_signal(
             self.original_widget,
@@ -75,7 +82,7 @@ class ButtonWithSettingsSelectorPopUp(urwid.PopUpLauncher):
     def close_pop_up(self):
         global ACTIVE_SETTINGS
         self.original_widget.set_label(
-                self.original_label % getSetting('xcsoar_setting_name', '???'))
+                self.original_label % getSetting('xcsoar_setting_name', ''))
         super(ButtonWithSettingsSelectorPopUp, self).close_pop_up()
 
     def get_pop_up_parameters(self):
@@ -88,8 +95,9 @@ class ButtonWithSettingsSelectorPopUp(urwid.PopUpLauncher):
 
 
 def initSettings():
+    global BOOTER_SETTINGS_FILE
     try:
-        with open(SETTINGS_FILE, 'r') as f:
+        with open(BOOTER_SETTINGS_FILE, 'r') as f:
             ACTIVE_SETTINGS.update(json.loads(f.read()))
     except IOError:
         pass
