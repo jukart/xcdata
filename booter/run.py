@@ -12,7 +12,7 @@ class RunPopUp(urwid.WidgetWrap):
         urwid.connect_signal(
             close_button, 'click', lambda button: self._emit("close"))
         output_widget = urwid.Text(
-            'Running command: ' + ' '.join(cmd) + '\n\n')
+            'Running command: ' + ' '.join(cmd) + '...\n\n')
         pile = urwid.Pile([
             ('weight', 18, output_widget),
             ('weight', 1, close_button)])
