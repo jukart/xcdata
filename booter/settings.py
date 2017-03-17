@@ -1,9 +1,10 @@
 import json
 import os
 import os.path
-import subprocess
 
 import urwid
+
+import setup
 
 BOOTER_BASE = os.path.expanduser('~/.xcsoar')
 BOOTER_SETTINGS_FILE = os.path.join(BOOTER_BASE, 'booter.json')
@@ -32,18 +33,16 @@ def commitSetting():
 
 
 class SettingsSelectorPopUp(urwid.WidgetWrap):
-    """Reads the settings using the fabric script and provides a selection
+    """Allows the user to select a setting
     """
     signals = ['close']
 
     def __init__(self):
-        proc = subprocess.Popen(['fab', 'xcsoar.list'], stdout=subprocess.PIPE)
-        (out, err) = proc.communicate()
         close_button = urwid.Button("close")
         urwid.connect_signal(
             close_button, 'click', lambda button: self._emit("close"))
         body = [close_button, urwid.Divider()]
-        for setting in sorted(json.loads(out.split('\n')[0])):
+        for setting in sorted(setup.settings.keys()):
             button = urwid.Button(setting)
             urwid.connect_signal(
                 button, 'click', self.settingSelected, setting)
