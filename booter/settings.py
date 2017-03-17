@@ -1,4 +1,5 @@
 import json
+import os
 import os.path
 import subprocess
 
@@ -96,6 +97,8 @@ class ButtonWithSettingsSelectorPopUp(urwid.PopUpLauncher):
 
 def initSettings():
     global BOOTER_SETTINGS_FILE
+    if not os.path.exists(BOOTER_SETTINGS_FILE):
+        os.makedirs(BOOTER_SETTINGS_FILE)
     try:
         with open(BOOTER_SETTINGS_FILE, 'r') as f:
             ACTIVE_SETTINGS.update(json.loads(f.read()))
