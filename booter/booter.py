@@ -50,12 +50,12 @@ choices = [
     (u'Fly LAK-17a 18m', buttonCreator(fly_18m)),
     (u'Fly LAK-17a 15m', buttonCreator(fly_15m)),
     (u'', None),
-    (u'Update Data', buttonCreator(update_data)),
     (u'Change Setting [%s]',
      popupCreator(settings.ButtonWithSettingsSelectorPopUp)),
     (u'', None),
     (u'Simulator', buttonCreator(simulator)),
     (u'', None),
+    (u'Update Data', buttonCreator(update_data)),
     (u'Exit', buttonCreator(exit)),
 ]
 
