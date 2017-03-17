@@ -21,7 +21,6 @@ class RunPopUp(urwid.WidgetWrap):
 
         def received_output(data):
             output_widget.set_text(output_widget.text + data)
-
         write_fd = loop.watch_pipe(received_output)
         subprocess.Popen(cmd, stdout=write_fd, stderr=write_fd, close_fds=True)
 
