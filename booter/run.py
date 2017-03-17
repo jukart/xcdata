@@ -13,7 +13,9 @@ class RunPopUp(urwid.WidgetWrap):
             close_button, 'click', lambda button: self._emit("close"))
         output_widget = urwid.Text(
             'Running command: ' + ' '.join(cmd) + '\n\n')
-        pile = urwid.Pile([output_widget, close_button])
+        pile = urwid.Pile([
+            ('weight', 18, output_widget),
+            ('weight', 1, close_button)])
         fill = urwid.Filler(pile)
         self.__super.__init__(urwid.AttrWrap(fill, 'popbg'))
 
@@ -47,8 +49,8 @@ class ButtonWithRunPopUp(urwid.PopUpLauncher):
         return {
             'left': 0,
             'top': 1,
-            'overlay_width': 76,
-            'overlay_height': 18,
+            'overlay_width': 80,
+            'overlay_height': 20,
         }
 
 
