@@ -79,7 +79,8 @@ def menu(title, choices):
     return urwid.ListBox(urwid.SimpleFocusListWalker(body))
 
 
-footer = urwid.Text('wlan-ip: waiting')
+footer_text = 'wlan-ip: %s'
+footer = urwid.Text(footer_text % 'starting')
 
 ip = ''
 
@@ -97,7 +98,27 @@ def update_ip(loop=None, user_data=None):
     else:
         ip = current_ip
         loop.set_alarm_in(10, update_ip)
-    footer.set_text('wlan-ip: %s' % ip)
+    footer.set_text(footer_text % ip)
+
+
+palette = [
+    ('header', 'black,underline', 'light gray', 'standout,underline',
+     'black,underline', '#88a'),
+    ('panel', 'light gray', 'dark blue', '', '#000', 'white'),
+    ('focus', 'light gray', 'dark cyan', 'standout', 'white', 'light green'),
+    ('reversed', 'standout', ''),
+    ('popbg', 'white', 'black', '', 'black', 'white'),
+    ('bg', 'white', 'black', '', 'black', 'white'),
+]
+
+placeholder = urwid.SolidFill()
+loop = urwid.MainLoop(
+    placeholder,
+    palette,
+    pop_ups=True,
+)
+loop.screen.set_terminal_properties(256)
+loop.widget = urwid.AttrMap(placeholder, 'bg')
 
 
 main = urwid.Frame(
@@ -106,7 +127,7 @@ main = urwid.Frame(
 )
 page = urwid.Overlay(
     main,
-    urwid.SolidFill(u'\N{MEDIUM SHADE}'),
+    urwid.SolidFill(u' '),
     align='center',
     width=('relative', 90),
     valign='middle',
@@ -114,34 +135,7 @@ page = urwid.Overlay(
     min_width=20,
     min_height=9,
 )
-
-screen = urwid.raw_display.Screen()
-screen.set_terminal_properties(256)
-
-palette = [
-    ('header',
-     'black,underline', 'light gray',
-     'standout,underline',
-     'black,underline', '#88a'),
-    ('panel',
-     'light gray', 'dark blue',
-     '',
-     '#000', 'white'),
-    ('focus',
-     'light gray', 'dark cyan',
-     'standout',
-     'white', 'dark green'),
-    ('reversed', 'standout', ''),
-    ('popbg', 'white', 'dark blue'),
-]
-
-screen.register_palette(palette)
-
-loop = urwid.MainLoop(
-    page,
-    screen=screen,
-    pop_ups=True,
-)
+loop.widget.original_widget = page
 
 # start the ip updater in the footer
 update_ip(loop)
