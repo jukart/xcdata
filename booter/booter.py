@@ -7,19 +7,24 @@ import run
 from ipdetect import get_ip_address
 
 
+def runXCSoar(*params):
+    if settings.DEVELOPING:
+        pass
+    else:
+        call(['xcsoar'].extend(params))
+        call(['sudo', 'reboot'])
+
+
 def fly_18m(button, params):
-    call(['xcsoar', '-fly'])
-    call(['sudo', 'reboot'])
+    runXCSoar('-fly')
 
 
 def fly_15m(button, params):
-    call(['xcsoar', '-fly'])
-    call(['sudo', 'reboot'])
+    runXCSoar('-fly')
 
 
 def simulator(button, params):
-    call(['xcsoar', '-simulator'])
-    call(['sudo', 'reboot'])
+    runXCSoar('-simulator')
 
 
 def update_data(button, params):

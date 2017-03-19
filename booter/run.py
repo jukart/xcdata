@@ -14,10 +14,12 @@ class RunPopUp(urwid.WidgetWrap):
         output_widget = urwid.Text(
             'Running command: ' + ' '.join(cmd) + '...\n\n')
         pile = urwid.Pile([
+            ('weight', 1, close_button),
             ('weight', 18, output_widget),
-            ('weight', 1, close_button)])
-        fill = urwid.Filler(pile)
-        self.__super.__init__(urwid.AttrWrap(fill, 'popbg'))
+            ])
+        box = urwid.Filler(pile, valign='top')
+        box = urwid.LineBox(box)
+        self.__super.__init__(urwid.AttrWrap(box, 'popbg'))
 
         def received_output(data):
             output_widget.set_text(output_widget.text + data)
@@ -47,7 +49,7 @@ class ButtonWithRunPopUp(urwid.PopUpLauncher):
     def get_pop_up_parameters(self):
         return {
             'left': 0,
-            'top': 1,
+            'top': 0,
             'overlay_width': 80,
             'overlay_height': 20,
         }
