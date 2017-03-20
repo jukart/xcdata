@@ -9,9 +9,13 @@ from ipdetect import get_ip_address
 
 def runXCSoar(*params):
     if settings.DEVELOPING:
-        pass
+        pars = ['/Applications/XCSoar.app/Contents/MacOS/xcsoar',
+                  '-1024x600']
     else:
-        call(['xcsoar'].extend(params))
+        pars = ['xcsoar']
+    pars.extend(params)
+    call(pars)
+    if not settings.DEVELOPING:
         call(['sudo', 'reboot'])
 
 
