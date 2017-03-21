@@ -160,7 +160,10 @@ def initSymlinks():
         if os.path.exists(target):
             # remove existing symlink
             os.remove(target)
-        os.symlink(os.path.join(sourceBase, name), target)
+        try:
+            os.symlink(os.path.join(sourceBase, name), target)
+        except IOError:
+            pass
 
 
 initSettings()
