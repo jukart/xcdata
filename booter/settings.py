@@ -162,7 +162,7 @@ def initSymlinks():
             os.remove(target)
         try:
             os.symlink(os.path.join(sourceBase, name), target)
-        except IOError:
+        except:
             pass
 
 
