@@ -154,6 +154,7 @@ def initSettings():
 
 def initSymlinks():
     # symlink settings
+    return
     for name in ['airspaces', 'maps', 'waypoints', 'planes']:
         sourceBase = os.path.join(XCDATA_BASE, 'data')
         target = os.path.join(XCSOAR_BASE, name)
