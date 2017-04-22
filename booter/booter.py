@@ -13,6 +13,7 @@ def runXCSoar(*params):
                 '-1024x600']
     else:
         pars = ['xcsoar']
+    pars.append('-profile=default.prf')
     pars.extend(params)
     call(pars)
     if not settings.DEVELOPING:
@@ -29,10 +30,6 @@ def fly_15m(button, params):
 
 def simulator(button, params):
     runXCSoar('-simulator')
-
-
-def update_data(button, params):
-    run.run(['git', 'pull'], loop)
 
 
 def exit(button, params):

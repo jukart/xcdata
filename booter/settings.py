@@ -1,6 +1,8 @@
+import time
 import json
 import os
 import os.path
+import shutil
 
 import urwid
 
@@ -19,12 +21,10 @@ BOOTER_SETTINGS_FILE = os.path.join(XCSOAR_BASE, 'booter.json')
 HERE = os.path.dirname(__file__)
 XCDATA_BASE = os.path.dirname(HERE)
 
-NOT_SET = 'not set'
-
 ACTIVE_SETTINGS = {
     'xcsoar': {
-        'setting': NOT_SET,
-        'plane': NOT_SET,
+        'setting': {
+        },
     },
 }
 
@@ -83,7 +83,10 @@ class SettingsSelectorPopUp(urwid.WidgetWrap):
         close_button = urwid.Button("close")
         urwid.connect_signal(
             close_button, 'click', lambda button: self._emit("close"))
-        body = [close_button, urwid.Divider()]
+        force_update_button = urwid.Button("force update")
+        urwid.connect_signal(
+            force_update_button, 'click', self.forceUpdate)
+        body = [close_button, force_update_button, urwid.Divider()]
         for setting in sorted(setup.settings.keys()):
             button = urwid.Button(setting)
             urwid.connect_signal(
@@ -98,8 +101,16 @@ class SettingsSelectorPopUp(urwid.WidgetWrap):
 
     def settingSelected(self, button, params):
         global ACTIVE_SETTINGS
-        setSetting('xcsoar.setting', button.get_label())
+        name = button.get_label()
+        data = setup.settings.get(name)
+        setSetting('xcsoar.setting.name', name)
+        setSetting('xcsoar.setting.data', data)
         commitSetting()
+        buildXCSoar()
+        self._emit("close")
+
+    def forceUpdate(self, button):
+        buildXCSoar(True)
         self._emit("close")
 
 
@@ -109,7 +120,7 @@ class ButtonWithSettingsSelectorPopUp(urwid.PopUpLauncher):
         global ACTIVE_SETTINGS
         self.original_label = thing.get_label()
         thing.set_label(
-            self.original_label % getSetting('xcsoar.setting', ''))
+            self.original_label % getSetting('xcsoar.setting.name', 'NOT SET!'))
         self.__super.__init__(thing)
         urwid.connect_signal(
             self.original_widget,
@@ -127,7 +138,8 @@ class ButtonWithSettingsSelectorPopUp(urwid.PopUpLauncher):
     def close_pop_up(self):
         global ACTIVE_SETTINGS
         self.original_widget.set_label(
-                self.original_label % getSetting('xcsoar.setting', ''))
+                self.original_label % getSetting('xcsoar.setting.name',
+                                                 'NOT SET!'))
         super(ButtonWithSettingsSelectorPopUp, self).close_pop_up()
 
     def get_pop_up_parameters(self):
@@ -141,7 +153,7 @@ class ButtonWithSettingsSelectorPopUp(urwid.PopUpLauncher):
 
 def initSettings():
     global BOOTER_SETTINGS_FILE
-    # create the BOOTER_BASEif not present
+    # create the XCSOAR_BASE if not present
     if not os.path.exists(XCSOAR_BASE):
         os.makedirs(XCSOAR_BASE)
     # read the current booter settings
@@ -152,21 +164,58 @@ def initSettings():
         pass
 
 
-def initSymlinks():
-    # symlink settings
-    # TODO: make this work on raspberry with already existing directories
-    return
-    for name in ['airspaces', 'maps', 'waypoints', 'planes', 'tasks']:
+def buildXCSoar(forceCopy=False):
+    """Create the XCSoar settings based on the active setting
+    """
+    backupDest = None
+    # create the symlinks
+    links = getSetting('xcsoar.setting.data.links', {})
+    for name, link in links.iteritems():
         sourceBase = os.path.join(XCDATA_BASE, 'data')
         target = os.path.join(XCSOAR_BASE, name)
         if os.path.exists(target):
-            # remove existing symlink
-            os.remove(target)
+            # remove existing data
+            #  - if it is a symlink just remove it
+            #  - everything else is just moved away to have a backup
+            if os.path.islink(target):
+                os.remove(target)
+            else:
+                if backupDest is None:
+                    now = time.strftime('%Y%m%d-%H%M%S')
+                    backupDest = os.path.join(
+                        XCSOAR_BASE,
+                        'xcdata_backup',
+                        now)
+                    if not os.path.exists(backupDest):
+                        os.makedirs(backupDest)
+                os.rename(
+                    target,
+                    os.path.join(
+                        backupDest,
+                        os.path.basename(target)
+                    )
+                )
+        if link is None:
+            continue
         try:
-            os.symlink(os.path.join(sourceBase, name), target)
+            os.symlink(os.path.join(sourceBase, link),
+                       target)
         except:
             pass
+    # copy files
+    links = getSetting('xcsoar.setting.data.copy', {})
+    for name, link in links.iteritems():
+        sourceBase = os.path.join(XCDATA_BASE, 'data')
+        target = os.path.join(XCSOAR_BASE, name)
+        if os.path.exists(target):
+            if not forceCopy:
+                continue
+            os.remove(target)
+            targetDir = os.path.dirname(target)
+            if not os.path.exists(targetDir):
+                os.makedirs(targetDir)
+        shutil.copyfile(sourceBase, target)
 
 
 initSettings()
-initSymlinks()
+buildXCSoar()
