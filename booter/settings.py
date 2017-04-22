@@ -154,8 +154,9 @@ def initSettings():
 
 def initSymlinks():
     # symlink settings
+    # TODO: make this work on raspberry with already existing directories
     return
-    for name in ['airspaces', 'maps', 'waypoints', 'planes']:
+    for name in ['airspaces', 'maps', 'waypoints', 'planes', 'tasks']:
         sourceBase = os.path.join(XCDATA_BASE, 'data')
         target = os.path.join(XCSOAR_BASE, name)
         if os.path.exists(target):

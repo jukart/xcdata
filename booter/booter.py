@@ -10,7 +10,7 @@ from ipdetect import get_ip_address
 def runXCSoar(*params):
     if settings.DEVELOPING:
         pars = ['/Applications/XCSoar.app/Contents/MacOS/xcsoar',
-                  '-1024x600']
+                '-1024x600']
     else:
         pars = ['xcsoar']
     pars.extend(params)

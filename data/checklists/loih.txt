@@ -1,0 +1,72 @@
+[Vor dem Einsteigen]
+!! Heckakku drin !!
+!! Heckballast (Wasser) !!
+!! Hauptbolzen mit Fokkernadeln gesichert !!
+!! Düse angebracht !!
+!! Haubennotabwurf entsichert !!
+
+Aussencheck
+
+Sauerstoff
+Trinkwasser vorhanden
+
+Stromversorgung einschalten
+Akkus prüfen
+Instrumente einschalten und überprüfen
+
+Fallschirm anlegen
+SPOT am Fallschirm befestigt und eingeschaltet
+
+[Nach dem Einsteigen]
+Angeschnallt
+
+Trinkwasser erreichbar
+Sauerstoff erreichbar
+Steuerung freigängig
+
+Wölbklappen OK
+Bremsklappen OK
+Trimmung Neutral
+
+Instrumente eingeschaltet
+
+[Vor dem Start]
+Haube verriegelt
+Wölbklappen in Stellung 0
+Steuerung freigängig
+
+Helfer bringt Kuller weg
+
+Nach dem Anrollen Wölbklappen auf 1
+
+[Innsbruck]
+ATIS  126.02 MHz
+Tower 120.10 MHz
+Radar 119.27 MHz
+Segelflug Frequenz Innbruck 123.400 MHz
+VOLMET 130.47 MHz
+
+[INSSBRUCK FREIGABEN]
+INNSBRUCK RADAR, D - 5461
+
+D - 5461 POSITION HÖHE
+ERBITTE FREIGABE FÜR DURCHFLUG DURCH KONTROLLZONE
+
+WEST:
+HOHE MUNDE - REITERSPITZE
+
+OST Talquerung:
+BETTELWURF - KELLERJOCH
+HOCHNISSL - KELLERJOCH
+
+[FIS]
+FIS-AT 124.40 Mhz
+
+[Sisteron]
+Sisteron 120.05 Mhz
+
+Pistenrichtungen: ?? / ??
+
+Meldepunkte (1100m) :
+ - ???
+ - ???
