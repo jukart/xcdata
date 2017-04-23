@@ -17,7 +17,7 @@ if DEVELOPING:
     USB_PATH = os.path.expanduser('~/XCSoarUSB')
 else:
     XCSOAR_BASE = os.path.expanduser('~/.xcsoar')
-    USB_PATH = '/media/usb0'
+    USB_PATH = '/mnt/usb'
 
 USB_SETTINGS_PATH = os.path.join(USB_PATH, 'settings')
 BOOTER_SETTINGS_FILE = os.path.join(XCSOAR_BASE, 'booter.json')
