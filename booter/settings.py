@@ -14,18 +14,19 @@ DEVELOPING = sysInfo[0] == 'Darwin'
 
 if DEVELOPING:
     XCSOAR_BASE = os.path.expanduser('~/XCSoarData')
+    USB_PATH = os.path.expanduser('~/XCSoarUSB')
 else:
     XCSOAR_BASE = os.path.expanduser('~/.xcsoar')
+    USB_PATH = '/mnt/???'
+
+USB_SETTINGS_PATH = os.path.join(USB_PATH, 'settings')
 BOOTER_SETTINGS_FILE = os.path.join(XCSOAR_BASE, 'booter.json')
 
 HERE = os.path.dirname(__file__)
 XCDATA_BASE = os.path.dirname(HERE)
 
+
 ACTIVE_SETTINGS = {
-    'xcsoar': {
-        'setting': {
-        },
-    },
 }
 
 
@@ -52,7 +53,7 @@ def setSetting(name, value):
         if container is None:
             # create the container path
             container = ACTIVE_SETTINGS
-            for name in name.split('.'):
+            for name in name.split('.')[:-1]:
                 next = container.get(name, object)
                 if next is object:
                     container = container.setdefault(name, {})
@@ -64,7 +65,7 @@ def setSetting(name, value):
 
 
 def commitSetting():
-    global BOOTER_SETTINGS_FILE
+    global BOOTER_SETTINGS_FILE, ACTIVE_SETTINGS
     with open(BOOTER_SETTINGS_FILE, 'w') as f:
         f.write(
             json.dumps(
@@ -72,6 +73,16 @@ def commitSetting():
                 indent=2,
                 sort_keys=True,
                 ))
+
+
+def getDecoratedSettingsName():
+    name = getSetting('name')
+    if name is None:
+        name = 'NOT SET!'
+    else:
+        name += ' ' + getSetting('source', '')
+        name += '-' + getSetting('created', '-')
+    return name
 
 
 class SettingsSelectorPopUp(urwid.WidgetWrap):
@@ -83,44 +94,61 @@ class SettingsSelectorPopUp(urwid.WidgetWrap):
         close_button = urwid.Button("close")
         urwid.connect_signal(
             close_button, 'click', lambda button: self._emit("close"))
-        force_update_button = urwid.Button("force update")
+
+        force_update_button = urwid.Button(
+            "update: " + getDecoratedSettingsName())
         urwid.connect_signal(
             force_update_button, 'click', self.forceUpdate)
-        body = [close_button, force_update_button, urwid.Divider()]
+
+        to_usb_copy_button = urwid.Button(
+            "to USB: " + getDecoratedSettingsName())
+        urwid.connect_signal(
+            to_usb_copy_button, 'click', self.toUSBCopy)
+
+        body = [
+            close_button,
+            to_usb_copy_button,
+            force_update_button,
+            urwid.Divider(),
+        ]
         for setting in sorted(setup.settings.keys()):
-            button = urwid.Button(setting)
+            button = urwid.Button(setting + ' (git)')
             urwid.connect_signal(
                 button, 'click', self.settingSelected, setting)
             body.append(urwid.AttrMap(button, 'panel', focus_map='focus'))
         selector = urwid.ListBox(urwid.SimpleFocusListWalker(body))
-        cols = urwid.Columns([
-            selector,
-            urwid.Filler(urwid.Text('Some text'))])
-        fill = urwid.LineBox(cols)
+        fill = urwid.LineBox(selector)
         self.__super.__init__(urwid.AttrWrap(fill, 'popbg'))
 
     def settingSelected(self, button, params):
         global ACTIVE_SETTINGS
-        name = button.get_label()
-        data = setup.settings.get(name)
-        setSetting('xcsoar.setting.name', name)
-        setSetting('xcsoar.setting.data', data)
+        ACTIVE_SETTINGS.clear()
+        data = setup.settings.get(params)
+        setSetting('name', params)
+        setSetting('created', time.strftime('%d.%m.%Y %H:%M:%S'))
+        setSetting('source', 'git')
+        setSetting('git.data', data)
         commitSetting()
         buildXCSoar()
         self._emit("close")
 
     def forceUpdate(self, button):
-        buildXCSoar(True)
+        setSetting('created', time.strftime('%d.%m.%Y %H:%M:%S'))
+        commitSetting()
+        buildXCSoar()
+        self._emit("close")
+
+    def toUSBCopy(self, button):
+        createUSBSetting()
         self._emit("close")
 
 
 class ButtonWithSettingsSelectorPopUp(urwid.PopUpLauncher):
 
     def __init__(self, thing):
-        global ACTIVE_SETTINGS
         self.original_label = thing.get_label()
         thing.set_label(
-            self.original_label % getSetting('xcsoar.setting.name', 'NOT SET!'))
+            self.original_label % getDecoratedSettingsName())
         self.__super.__init__(thing)
         urwid.connect_signal(
             self.original_widget,
@@ -136,10 +164,8 @@ class ButtonWithSettingsSelectorPopUp(urwid.PopUpLauncher):
         return pop_up
 
     def close_pop_up(self):
-        global ACTIVE_SETTINGS
         self.original_widget.set_label(
-                self.original_label % getSetting('xcsoar.setting.name',
-                                                 'NOT SET!'))
+                self.original_label % getDecoratedSettingsName())
         super(ButtonWithSettingsSelectorPopUp, self).close_pop_up()
 
     def get_pop_up_parameters(self):
@@ -151,27 +177,23 @@ class ButtonWithSettingsSelectorPopUp(urwid.PopUpLauncher):
         }
 
 
-def initSettings():
-    global BOOTER_SETTINGS_FILE
-    # create the XCSOAR_BASE if not present
-    if not os.path.exists(XCSOAR_BASE):
-        os.makedirs(XCSOAR_BASE)
-    # read the current booter settings
-    try:
-        with open(BOOTER_SETTINGS_FILE, 'r') as f:
-            ACTIVE_SETTINGS.update(json.loads(f.read()))
-    except IOError:
-        pass
+def buildXCSoar(*args, **kwargs):
+    buildType = getSetting('source')
+    if buildType == 'git':
+        buildXCSoarFromGit(*args, **kwargs)
+    elif buildType == 'usb':
+        buildXCSoarFromUSB(*args, **kwargs)
 
 
-def buildXCSoar(forceCopy=False):
+def buildXCSoarFromGit():
     """Create the XCSoar settings based on the active setting
     """
     backupDest = None
+    sourceBase = os.path.join(XCDATA_BASE, 'data')
     # create the symlinks
-    links = getSetting('xcsoar.setting.data.links', {})
+    links = getSetting('git.data.links', {})
+    files = []
     for name, link in links.iteritems():
-        sourceBase = os.path.join(XCDATA_BASE, 'data')
         target = os.path.join(XCSOAR_BASE, name)
         if os.path.exists(target):
             # remove existing data
@@ -197,25 +219,95 @@ def buildXCSoar(forceCopy=False):
                 )
         if link is None:
             continue
+        targetBase = os.path.dirname(target)
+        if not os.path.exists(targetBase):
+            os.makedirs(targetBase)
         try:
-            os.symlink(os.path.join(sourceBase, link),
-                       target)
+            linkTo = os.path.join(sourceBase, link)
+            files.append(name)
+            os.symlink(linkTo, target)
         except:
             pass
     # copy files
-    links = getSetting('xcsoar.setting.data.copy', {})
-    for name, link in links.iteritems():
-        sourceBase = os.path.join(XCDATA_BASE, 'data')
+    copy = getSetting('git.data.copy', {})
+    for name, source in copy.iteritems():
         target = os.path.join(XCSOAR_BASE, name)
+        files.append(name)
         if os.path.exists(target):
-            if not forceCopy:
-                continue
             os.remove(target)
             targetDir = os.path.dirname(target)
             if not os.path.exists(targetDir):
                 os.makedirs(targetDir)
-        shutil.copyfile(sourceBase, target)
+        if source is None:
+            continue
+        sourcePath = os.path.join(XCDATA_BASE, 'data', source)
+        shutil.copyfile(sourcePath, target)
+    setSetting('files', files)
+    commitSetting()
+
+
+def buildXCSoarFromUSB(*args, **kwargs):
+    if not USBConnected():
+        return
+
+
+def createUSBSetting(name=None):
+    """Create or update a setting on the USB path from current settings
+
+    This will create a copy of all setting related files on the
+    USB_SETTINGS_PATH with the given name. If no name is provided the name in
+    the settings is used.
+    """
+    if not USBConnected():
+        return
+    if name is None:
+        name = getSetting('name')
+    if not name:
+        return
+    name += time.strftime('-%Y%m%d-%H%M%S')
+    files = getSetting('files', [])
+    baseTargetPath = os.path.join(USB_SETTINGS_PATH, name)
+    if os.path.exists(baseTargetPath):
+        shutil.rmtree(baseTargetPath)
+    if not os.path.exists(baseTargetPath):
+        os.makedirs(baseTargetPath)
+    for source in files:
+        sourcePath = os.path.join(XCSOAR_BASE, source)
+        if not os.path.exists(sourcePath):
+            continue
+        targetPath = os.path.join(baseTargetPath, source)
+        if os.path.isdir(sourcePath):
+            if os.path.exists(targetPath):
+                if os.path.isdir(targetPath):
+                    os.remove(targetPath)
+                else:
+                    shutil.rmtree(targetPath)
+            shutil.copytree(sourcePath, targetPath)
+        else:
+            # copy a single file
+            targetDir = os.path.dirname(targetPath)
+            if not os.path.exists(targetDir):
+                os.makedirs(targetDir)
+            shutil.copy(sourcePath, targetPath)
+
+
+def USBConnected():
+    return os.path.exists(USB_PATH) and os.path.isdir(USB_PATH)
+
+
+def initSettings():
+    global BOOTER_SETTINGS_FILE, ACTIVE_SETTINGS
+    # create the XCSOAR_BASE if not present
+    if not os.path.exists(XCSOAR_BASE):
+        os.makedirs(XCSOAR_BASE)
+    # read the current booter settings
+    try:
+        with open(BOOTER_SETTINGS_FILE, 'r') as f:
+            settings = json.loads(f.read())
+        ACTIVE_SETTINGS.clear()
+        ACTIVE_SETTINGS.update(settings)
+    except IOError:
+        pass
 
 
 initSettings()
-buildXCSoar()

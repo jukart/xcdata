@@ -3,7 +3,7 @@ import urwid
 
 
 class RunPopUp(urwid.WidgetWrap):
-    """Runs a command in a subprocess and show the output
+    """Runs a command in a subprocess and shows the output
     """
     signals = ['close']
 
