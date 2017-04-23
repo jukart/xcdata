@@ -292,7 +292,7 @@ def createUSBSetting(name=None):
 
 
 def USBConnected():
-    return os.path.exists(USB_PATH) and os.path.isdir(USB_PATH)
+    return os.path.exists(USB_PATH) # and os.path.isdir(USB_PATH)
 
 
 def initSettings():
