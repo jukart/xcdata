@@ -116,6 +116,12 @@ class SettingsSelectorPopUp(urwid.WidgetWrap):
             urwid.connect_signal(
                 button, 'click', self.settingSelected, setting)
             body.append(urwid.AttrMap(button, 'panel', focus_map='focus'))
+        body.append(urwid.Divider())
+        for filename in USBFiles():
+            button = urwid.Button(filename + ' (USB)')
+            urwid.connect_signal(
+                button, 'click', self.USBSettingSelected, filename)
+            body.append(urwid.AttrMap(button, 'panel', focus_map='focus'))
         selector = urwid.ListBox(urwid.SimpleFocusListWalker(body))
         fill = urwid.LineBox(selector)
         self.__super.__init__(urwid.AttrWrap(fill, 'popbg'))
@@ -128,6 +134,17 @@ class SettingsSelectorPopUp(urwid.WidgetWrap):
         setSetting('created', time.strftime('%d.%m.%Y %H:%M:%S'))
         setSetting('source', 'git')
         setSetting('git.data', data)
+        commitSetting()
+        buildXCSoar()
+        self._emit("close")
+
+    def USBSettingSelected(self, button, params):
+        global ACTIVE_SETTINGS
+        ACTIVE_SETTINGS.clear()
+        setSetting('name', params)
+        setSetting('created', time.strftime('%d.%m.%Y %H:%M:%S'))
+        setSetting('source', 'USB')
+        setSetting('USB.dirname', params)
         commitSetting()
         buildXCSoar()
         self._emit("close")
@@ -181,7 +198,7 @@ def buildXCSoar(*args, **kwargs):
     buildType = getSetting('source')
     if buildType == 'git':
         buildXCSoarFromGit(*args, **kwargs)
-    elif buildType == 'usb':
+    elif buildType == 'USB':
         buildXCSoarFromUSB(*args, **kwargs)
 
 
@@ -249,6 +266,12 @@ def buildXCSoarFromGit():
 def buildXCSoarFromUSB(*args, **kwargs):
     if not USBConnected():
         return
+    dirname = getSetting('USB.dirname')
+    if not dirname:
+        return
+    sourcePath = os.path.join(USB_SETTINGS_PATH, dirname)
+    if not os.path.isdir(sourcePath):
+        return
 
 
 def createUSBSetting(name=None):
@@ -289,6 +312,13 @@ def createUSBSetting(name=None):
             if not os.path.exists(targetDir):
                 os.makedirs(targetDir)
             shutil.copy(sourcePath, targetPath)
+
+
+def USBFiles():
+    if USBConnected():
+        for filename in os.listdir(USB_SETTINGS_PATH):
+            if not filename.startswith('.'):
+                yield filename
 
 
 def USBConnected():
