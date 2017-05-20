@@ -322,7 +322,7 @@ def USBFiles():
 
 
 def USBConnected():
-    return os.path.exists(USB_PATH) # and os.path.isdir(USB_PATH)
+    return os.path.exists(USB_SETTINGS_PATH)
 
 
 def initSettings():
