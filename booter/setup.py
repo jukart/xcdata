@@ -28,7 +28,7 @@ settings = {
             "data/watched.cup": None,
             "data/map.xcm": "maps/ALPS_HighRes.xcm",
             "data/checklist.txt": "checklists/loih.txt",
-            "data/events.xci": "xcsoar/events.xci",
+            "data/events.xci": "xcsoar/events_aac.xci",
             "data/plane.xcp": "planes/D-5461-18m.xcp",
             "data/tasks": "tasks",
         },
