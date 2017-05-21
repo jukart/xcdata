@@ -34,7 +34,7 @@ settings = {
         },
         "copy": {
             "default.prf": "profiles/competition.prf",
-            "Default.tsk": "tasks/aac-2017-106-day1.tsk",
+            "Default.tsk": "tasks/aac-2017-offen-day1.tsk",
         },
     },
 }
