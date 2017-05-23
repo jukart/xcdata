@@ -77,7 +77,7 @@ event=Beep 1
 # mode=default
 # ------------
 
-mode=Nav1 Nav2 Display1 Display2 Config1 Config2 Config3 Info1 Info2 Menu Vario1 Vario2
+mode=Navi1 Navi2 Display1 Display2 Config1 Config2 Config3 Info1 Info2 Vario1 Vario2
 type=key
 data=ESCAPE
 event=Mode default
@@ -92,56 +92,6 @@ type=key
 data=RETURN
 event=Traffic details
 
-###### pan mode
-
-mode=pan
-type=key
-data=DOWN
-event=Pan down
-
-mode=pan
-type=key
-data=UP
-event=Pan up
-
-mode=pan
-type=key
-data=LEFT
-event=Pan left
-
-mode=pan
-type=key
-data=RIGHT
-event=Pan right
-
-mode=pan
-type=key
-data=APP1
-event=Pan off
-label=Pan\nOff
-location=1
-
-mode=pan
-type=key
-data=APP2
-event=Zoom in
-label=Zoom\nIn
-location=2
-
-mode=pan
-type=key
-data=APP3
-event=Zoom out
-label=Zoom\nOut
-location=3
-
-mode=pan
-type=key
-data=APP4
-event=NearestMapItems
-label=What's\nhere?
-location=4
-
 ###### main entry buttons
 
 mode=default
@@ -149,74 +99,112 @@ type=key
 data=F1
 event=QuickMenu
 
+# ========================================================================
+# stick top buttons
+
 mode=default
 type=key
 data=F2
 event=Analysis
 event=Mode default
 
+# show list of alternates
 mode=default
 type=key
 data=F3
-event=Checklist
-event=Mode default
-
-mode=default
-type=key
-data=F4
-event=FlarmTraffic
-event=Mode default
-
-mode=default
-type=key
-data=F5
-event=Mode Nav1
-#event=GotoLookup
-#event=Mode default
-
-mode=default
-type=key
-data=F6
 event=Setup Alternates
 event=Mode default
 
+# activate menu for navigation
 mode=default
 type=key
-data=F7
-event=Setup Task
+data=F4
+event=Mode Navi1
+
+
+# ========================================================================
+# stick Navi1 top buttons
+
+mode=Navi1
+type=key
+data=RIGHT
+event=Mode Navi2
+label=< Nav 2 >
+location=1
+
+mode=Navi1
+type=key
+data=LEFT
+event=Mode Navi2
+label=< Nav 2 >
+location=1
+
+mode=Navi1
+type=key
+data=F2
+event=Calculator
 event=Mode default
+label=Task
+location=6
 
-mode=default
+mode=Navi1
 type=key
-data=F8
-event=Setup Basic
+data=F3
+event=AdjustWaypoint previousarm
+label=$(WaypointPreviousArm)
+location=7
+
+mode=Navi1
+type=key
+data=F4
+event=AdjustWaypoint nextarm
+label=$(WaypointNextArm)
+location=8
+
+# ========================================================================
+# stick Navi2 top buttons
+
+mode=Navi2
+type=key
+data=RIGHT
+event=Mode Navi1
+label=< Nav 1 >
+location=1
+
+mode=Navi2
+type=key
+data=LEFT
+event=Mode Navi1
+label=< Nav 1 >
+location=1
+
+mode=Navi2
+type=key
+data=F2
 event=Mode default
+event=AbortTask toggle
+label=Task\n$(TaskAbortToggleActionName)$(CheckWaypointFile)
+location=6
 
-mode=default
+mode=Navi2
 type=key
-data=MENU
-event=Mode Menu
+data=F3
+event=Mode default
+event=StatusMessage Dropped marker
+event=Logger note Mark
+event=MarkLocation
+label=Mark\nDrop
+location=7
 
-mode=default
+mode=Navi2
 type=key
-data=APP1
-event=Mode Nav1
+data=F4
+event=WaypointDetails select
+event=Mode default
+label=Waypoint\nList$(CheckWaypointFile)
+location=8
 
-mode=default
-type=key
-data=APP2
-event=Mode Display1
-
-mode=default
-type=key
-data=APP3
-event=Mode Config1
-
-mode=default
-type=key
-data=APP4
-event=Mode Info1
-
+# ========================================================================
 # Always active buttons. (unless over-written)
 
 mode=default
@@ -245,69 +233,6 @@ mode=default
 type=key
 data=RIGHT
 event=ScreenModes next
-
-# Gestures
-
-mode=default
-type=gesture
-data=U
-event=Zoom in
-
-mode=default
-type=gesture
-data=D
-event=Zoom out
-
-mode=default
-type=gesture
-data=UD
-event=Zoom auto show
-event=Zoom auto on
-
-mode=default
-type=gesture
-data=R
-event=ScreenModes previous
-
-mode=default
-type=gesture
-data=L
-event=ScreenModes next
-
-mode=default
-type=gesture
-data=DR
-event=WaypointDetails select
-
-mode=default
-type=gesture
-data=DL
-event=Setup Alternates
-
-mode=default
-type=gesture
-data=DU
-event=Mode Menu
-
-mode=default
-type=gesture
-data=RD
-event=Calculator
-
-mode=default
-type=gesture
-data=URD
-event=Analysis
-
-mode=default
-type=gesture
-data=URDL
-event=Pan on
-
-mode=default
-type=gesture
-data=LDRDL
-event=Status all
 
 ###
 
@@ -340,91 +265,6 @@ event=Setup Target
 #event=ArmAdvance toggle
 
 
-# -------------
-# mode=Nav1
-# -------------
-
-mode=Nav1
-type=key
-data=RETURN
-event=Mode Nav2
-label=Nav\n1/2
-location=1
-
-mode=Nav1
-type=key
-data=6
-event=Calculator
-event=Mode default
-label=Task
-location=5
-
-mode=Nav1
-type=key
-data=7
-event=AdjustWaypoint previousarm
-label=$(WaypointPreviousArm)
-location=6
-
-mode=Nav1
-type=key
-data=8
-event=AdjustWaypoint nextarm
-label=$(WaypointNextArm)
-location=7
-
-mode=Nav1
-type=key
-data=9
-event=WaypointDetails select
-event=Mode default
-label=Waypoint\nList$(CheckWaypointFile)
-location=8
-
-mode=Nav1
-type=key
-data=0
-event=Setup Alternates
-event=Mode default
-label=Alternates$(CheckWaypointFile)
-location=9
-
-# -------------
-# mode=Nav2
-# -------------
-
-mode=Nav2
-type=key
-data=RETURN
-event=Mode Nav1
-label=Nav\n2/2
-location=1
-
-mode=Nav2
-type=key
-data=6
-event=Mode default
-event=AbortTask toggle
-label=Task\n$(TaskAbortToggleActionName)$(CheckWaypointFile)
-location=5
-
-mode=Nav2
-type=key
-data=7
-event=Mode default
-event=StatusMessage Dropped marker
-event=Logger note Mark
-event=MarkLocation
-label=Mark\nDrop
-location=6
-
-mode=Nav2
-type=key
-data=9
-event=Setup Target
-event=Mode default
-label=Target$(CheckTask)$(CheckTaskResumed)
-location=7
 
 # -------------
 # mode=Display1
@@ -868,53 +708,6 @@ event=RepeatStatusMessage
 label=Message\nRepeat
 location=7
 
-# -------------
-# mode=Menu
-# -------------
-
-mode=Menu
-type=key
-data=APP1
-event=Mode Nav1
-label=Nav
-location=1
-
-mode=Menu
-type=key
-data=APP2
-event=Mode Display1
-label=Display
-location=2
-
-mode=Menu
-type=key
-data=APP3
-event=Mode Config1
-label=Config
-location=3
-
-mode=Menu
-type=key
-data=APP4
-event=Mode Info1
-label=Info
-location=4
-
-mode=Menu
-type=key
-data=9
-event=Mode default
-label=Cancel
-location=8
-
-mode=Menu
-type=key
-data=0
-event=Exit system
-event=Mode default
-label=Quit
-location=9
-
 # ----------------------------------
 # mode=default.TA (ThermalAssistant)
 # ----------------------------------
@@ -1213,6 +1006,6 @@ location=30
 mode=RemoteStick
 type=key
 data=0
-event=Mode Nav1
+event=Mode Navi1
 label=Nav
 location=31
