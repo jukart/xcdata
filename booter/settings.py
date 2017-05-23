@@ -85,6 +85,15 @@ def getDecoratedSettingsName():
     return name
 
 
+class ESCSimpleFocusListWalker(urwid.SimpleFocusListWalker):
+
+    def keypress(self, size, key):
+        if key == 'esc':
+            self._emit("close")
+        else:
+            return super(ESCSimpleFocusListWalker, self).keypress(size, key)
+
+
 class SettingsSelectorPopUp(urwid.WidgetWrap):
     """Allows the user to select a setting
     """
@@ -125,6 +134,12 @@ class SettingsSelectorPopUp(urwid.WidgetWrap):
         selector = urwid.ListBox(urwid.SimpleFocusListWalker(body))
         fill = urwid.LineBox(selector)
         self.__super.__init__(urwid.AttrWrap(fill, 'popbg'))
+
+    def keypress(self, size, key):
+        if key == 'esc':
+            self._emit("close")
+        else:
+            return super(SettingsSelectorPopUp, self).keypress(size, key)
 
     def settingSelected(self, button, params):
         global ACTIVE_SETTINGS
