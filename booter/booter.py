@@ -54,19 +54,34 @@ def getLoop():
     return loop
 
 
-choices = [
-    (u'Fly LAK-17a 18m', buttonCreator(fly_18m)),
-    (u'Fly LAK-17a 15m', buttonCreator(fly_15m)),
-    (u'', None),
-    (u'Change Setting [%s]',
-     popupCreator(settings.ButtonWithSettingsSelectorPopUp)),
-    (u'', None),
-    (u'Simulator', buttonCreator(simulator)),
-    (u'', None),
-    (u'Update Data [via git pull]',
-     popupCreator(run.runCreator(['git', 'pull'], getLoop))),
-    (u'Exit', buttonCreator(exit)),
-]
+choices = []
+
+if settings.DEVELOPING:
+    choices = [
+        (u'Simulator', buttonCreator(simulator)),
+        (u'', None),
+        (u'Change Setting [%s]',
+         popupCreator(settings.ButtonWithSettingsSelectorPopUp)),
+        (u'', None),
+        (u'Fly LAK-17a 18m', buttonCreator(fly_18m)),
+        (u'', None),
+        (u'Update Data [via git pull]',
+         popupCreator(run.runCreator(['git', 'pull'], getLoop))),
+        (u'Exit', buttonCreator(exit)),
+    ]
+else:
+    choices = [
+        (u'Fly LAK-17a 18m', buttonCreator(fly_18m)),
+        (u'', None),
+        (u'Change Setting [%s]',
+         popupCreator(settings.ButtonWithSettingsSelectorPopUp)),
+        (u'', None),
+        (u'Simulator', buttonCreator(simulator)),
+        (u'', None),
+        (u'Update Data [via git pull]',
+         popupCreator(run.runCreator(['git', 'pull'], getLoop))),
+        (u'Exit', buttonCreator(exit)),
+    ]
 
 
 def menu(title, choices):
