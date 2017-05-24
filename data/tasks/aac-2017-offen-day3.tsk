@@ -1,4 +1,4 @@
-<Task fai_finish="0" finish_min_height_ref="AGL" finish_min_height="75" start_max_height_ref="AGL" start_max_height="0" start_max_speed="0" start_requires_arm="1" aat_min_time="8100" type="AAT">
+<Task fai_finish="0" finish_min_height_ref="AGL" finish_min_height="50" start_max_height_ref="AGL" start_max_height="0" start_max_speed="0" start_requires_arm="1" aat_min_time="5400" type="AAT">
 	<Point type="Start">
 		<Waypoint altitude="687" comment="" id="61" name="061Himmelberg">
 			<Location latitude="46.7556" longitude="14.0294"/>
