@@ -1,0 +1,32 @@
+<Task fai_finish="0" finish_min_height_ref="AGL" finish_min_height="75" start_max_height_ref="AGL" start_max_height="0" start_max_speed="0" start_requires_arm="1" aat_min_time="8100" type="AAT">
+	<Point type="Start">
+		<Waypoint altitude="687" comment="" id="61" name="061Himmelberg">
+			<Location latitude="46.7556" longitude="14.0294"/>
+		</Waypoint>
+		<ObservationZone length="10000" type="Line"/>
+	</Point>
+	<Point type="Area">
+		<Waypoint altitude="636" comment="" id="94" name="094Lienz">
+			<Location latitude="46.7981" longitude="12.8784"/>
+		</Waypoint>
+		<ObservationZone radius="25000" type="Cylinder"/>
+	</Point>
+	<Point type="Area">
+		<Waypoint altitude="648" comment="" id="74" name="074Karawankeltunnel Nordportal">
+			<Location latitude="46.5194" longitude="14.0231"/>
+		</Waypoint>
+		<ObservationZone radius="10000" type="Cylinder"/>
+	</Point>
+	<Point type="Area">
+		<Waypoint altitude="658" comment="" id="2" name="002Tiffen">
+			<Location latitude="46.7069" longitude="14.0567"/>
+		</Waypoint>
+		<ObservationZone radius="500" type="Cylinder"/>
+	</Point>
+	<Point type="Finish">
+		<Waypoint altitude="520" comment="" id="1" name="001Feldkirchen">
+			<Location latitude="46.7086" longitude="14.0764"/>
+		</Waypoint>
+		<ObservationZone length="1000" type="Line"/>
+	</Point>
+</Task>
