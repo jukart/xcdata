@@ -53,7 +53,7 @@ settings = {
         },
         "copy": {
             "default.prf": "profiles/aat.prf",
-            "Default.tsk": "tasks/aac-2017-offen-day2.tsk",
+            "Default.tsk": "tasks/aac-2017-offen-day3.tsk",
         },
     },
 }
