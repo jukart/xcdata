@@ -77,7 +77,7 @@ event=Beep 1
 # mode=default
 # ------------
 
-mode=Navi1 Navi2 Display1 Display2 Config1 Config2 Config3 Info1 Info2 Vario1 Vario2
+mode=Navi1 Navi2 Fun1 Display1 Display2 Config1 Config2 Config3 Info1 Info2 Vario1 Vario2
 type=key
 data=ESCAPE
 event=Mode default
