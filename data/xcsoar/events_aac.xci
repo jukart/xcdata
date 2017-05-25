@@ -123,20 +123,45 @@ event=Mode Navi1
 
 
 # ========================================================================
+# stick Fun1 top buttons
+
+mode=Fun1
+type=key
+data=RIGHT
+event=Mode Navi1
+label=< Nav 2\nNav 1 >
+location=1
+
+mode=Fun1
+type=key
+data=LEFT
+event=Mode Navi2
+label=< Nav 2\nNav 1 >
+location=1
+
+mode=Fun1
+type=key
+data=F2
+event=Zoom auto show
+event=Zoom auto toggle
+label=Zoom\n$(ZoomAutoToggleActionName)
+location=5
+
+# ========================================================================
 # stick Navi1 top buttons
 
 mode=Navi1
 type=key
 data=RIGHT
 event=Mode Navi2
-label=< Nav 2 >
+label=< Fun 1\nNav 2 >
 location=1
 
 mode=Navi1
 type=key
 data=LEFT
-event=Mode Navi2
-label=< Nav 2 >
+event=Mode Fun1
+label=< Fun 1\nNav 2 >
 location=1
 
 mode=Navi1
@@ -145,21 +170,21 @@ data=F2
 event=Calculator
 event=Mode default
 label=Task
-location=6
+location=5
 
 mode=Navi1
 type=key
 data=F3
 event=AdjustWaypoint previousarm
 label=$(WaypointPreviousArm)
-location=7
+location=6
 
 mode=Navi1
 type=key
 data=F4
 event=AdjustWaypoint nextarm
 label=$(WaypointNextArm)
-location=8
+location=7
 
 # ========================================================================
 # stick Navi2 top buttons
@@ -167,15 +192,16 @@ location=8
 mode=Navi2
 type=key
 data=RIGHT
-event=Mode Navi1
+event=Mode Fun1
 label=< Nav 1 >
+label=< Nav 1\nFun 1 >
 location=1
 
 mode=Navi2
 type=key
 data=LEFT
 event=Mode Navi1
-label=< Nav 1 >
+label=< Nav 1\nFun 1 >
 location=1
 
 mode=Navi2
@@ -184,7 +210,7 @@ data=F2
 event=Mode default
 event=AbortTask toggle
 label=Task\n$(TaskAbortToggleActionName)$(CheckWaypointFile)
-location=6
+location=5
 
 mode=Navi2
 type=key
@@ -194,7 +220,7 @@ event=StatusMessage Dropped marker
 event=Logger note Mark
 event=MarkLocation
 label=Mark\nDrop
-location=7
+location=6
 
 mode=Navi2
 type=key
@@ -202,7 +228,7 @@ data=F4
 event=WaypointDetails select
 event=Mode default
 label=Waypoint\nList$(CheckWaypointFile)
-location=8
+location=7
 
 # ========================================================================
 # Always active buttons. (unless over-written)
