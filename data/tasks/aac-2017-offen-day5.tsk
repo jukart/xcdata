@@ -1,0 +1,32 @@
+<Task fai_finish="0" finish_min_height_ref="AGL" finish_min_height="50" start_max_height_ref="AGL" start_max_height="0" start_max_speed="0" start_requires_arm="0" aat_min_time="8100" type="RT">
+	<Point type="Start">
+		<Waypoint altitude="687" comment="" id="61" name="061Himmelberg">
+			<Location latitude="46.7556" longitude="14.0294"/>
+		</Waypoint>
+		<ObservationZone length="10000" type="Line"/>
+	</Point>
+	<Point type="Turn">
+		<Waypoint altitude="838" comment="" id="113" name="113Montal bei Bruneck">
+			<Location latitude="46.7719" longitude="11.8586"/>
+		</Waypoint>
+		<ObservationZone radius="500" type="Cylinder"/>
+	</Point>
+	<Point type="Turn">
+		<Waypoint altitude="1110" comment="" id="107" name="107Mauterndorf">
+			<Location latitude="47.1319" longitude="13.6961"/>
+		</Waypoint>
+		<ObservationZone radius="500" type="Cylinder"/>
+	</Point>
+	<Point type="Turn">
+		<Waypoint altitude="658" comment="" id="2" name="002Tiffen">
+			<Location latitude="46.7069" longitude="14.0567"/>
+		</Waypoint>
+		<ObservationZone radius="500" type="Cylinder"/>
+	</Point>
+	<Point type="Finish">
+		<Waypoint altitude="520" comment="" id="1" name="001Feldkirchen">
+			<Location latitude="46.7086" longitude="14.0764"/>
+		</Waypoint>
+		<ObservationZone length="1000" type="Line"/>
+	</Point>
+</Task>
