@@ -1,5 +1,5 @@
 settings = {
-    "loih": {
+    "_loih": {
         "links": {
             "data/airspace1.txt": "airspaces/lovv.desktop.strepla.openair.txt",
             "data/airspace2.txt": None,
