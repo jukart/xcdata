@@ -77,7 +77,7 @@ event=Beep 1
 # mode=default
 # ------------
 
-mode=Navi1 Fun1 Display1 Display2 Config1 Config2 Config3 Info1 Info2 Vario1 Vario2
+mode=Navi1 MC Bugs Ballast Display1 Display2 Config1 Config2 Config3 Info1 Info2 Vario1 Vario2
 type=key
 data=ESCAPE
 event=Mode default
@@ -115,45 +115,51 @@ data=F3
 event=Setup Alternates
 event=Mode default
 
-# activate menu for navigation
+# activate menu start with MC
 mode=default
 type=key
 data=F4
-event=Mode Navi1
+event=Mode MC
 
 
 # ========================================================================
-# stick Fun1 top buttons
+# Menu order:
+#
+#   MC <-> Bugs <-> Ballast <-> Navi1
+#
+# ========================================================================
 
-mode=Fun1
+# ========================================================================
+# MC menu
+
+mode=MC
 type=key
 data=RIGHT
-event=Mode Navi1
-label=<   >
+event=Mode Bugs
 location=1
 
-mode=Fun1
+mode=MC
 type=key
 data=LEFT
 event=Mode Navi1
-label=<   >
+label=< MC >
 location=1
 
-mode=Fun1
+mode=MC
 type=key
 data=UP
 event=MacCready up
 label=MC +
 location=3
 
-mode=Fun1
+mode=MC
 type=key
 data=DOWN
 event=MacCready down
 label=MC -
 location=4
 
-mode=Fun1
+mode=MC
 type=key
 data=F2
 event=MacCready auto show
@@ -161,7 +167,7 @@ event=MacCready auto toggle
 label=$(CheckAutoMc)MC\n$(MacCreadyToggleActionName)
 location=5
 
-mode=Fun1
+mode=MC
 type=key
 data=F3
 event=Zoom auto show
@@ -169,21 +175,139 @@ event=Zoom auto toggle
 label=Zoom\n$(ZoomAutoToggleActionName)
 location=6
 
+mode=MC
+type=key
+data=F1
+event=MacCready show
+label=MacCready\nShow
+location=9
+
+
 # ========================================================================
-# stick Navi1 top buttons
+# Bugs menu
+
+mode=Bugs
+type=key
+data=RIGHT
+event=Mode Ballast
+location=1
+
+mode=Bugs
+type=key
+data=LEFT
+event=Mode MC
+label=< BUGS >
+location=1
+
+mode=Bugs
+type=key
+data=UP
+event=Bugs show
+event=Bugs up
+label=Bugs +
+location=3
+
+mode=Bugs
+type=key
+data=DOWN
+event=Bugs show
+event=Bugs down
+label=Bugs -
+location=4
+
+mode=Bugs
+type=key
+data=F2
+event=Bugs show
+event=Bugs min
+label=Bugs Min
+location=5
+
+mode=Bugs
+type=key
+data=F3
+event=Bugs show
+event=Bugs max
+label=Bugs Max
+location=6
+
+mode=Bugs
+type=key
+data=F1
+event=Bugs show
+label=Bugs Show
+location=9
+
+
+# ========================================================================
+# Ballast menu
+
+mode=Ballast
+type=key
+data=RIGHT
+event=Mode Navi1
+location=1
+
+mode=Ballast
+type=key
+data=LEFT
+event=Mode Bugs
+label=< BALLAST >
+location=1
+
+mode=Ballast
+type=key
+data=UP
+event=Ballast show
+event=Ballast up
+label=Ballast +
+location=3
+
+mode=Ballast
+type=key
+data=DOWN
+event=Ballast show
+event=Ballast down
+label=Ballast -
+location=4
+
+mode=Ballast
+type=key
+data=F2
+event=Ballast show
+event=Ballast min
+label=Ballast Min
+location=5
+
+mode=Ballast
+type=key
+data=F3
+event=Ballast show
+event=Ballast max
+label=Ballast Max
+location=6
+
+mode=Ballast
+type=key
+data=F1
+event=Ballast show
+label=Ballast Show
+location=9
+
+# ========================================================================
+# Navi1 menue
 
 mode=Navi1
 type=key
 data=RIGHT
-event=Mode Fun1
-label=<   >
+event=Mode MC
 location=1
 
 mode=Navi1
 type=key
 data=LEFT
-event=Mode Fun1
-label=<   >
+event=Mode Ballast
+label=< NAV >
 location=1
 
 mode=Navi1
