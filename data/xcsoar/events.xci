@@ -115,11 +115,11 @@ data=F3
 event=Setup Alternates
 event=Mode default
 
-# activate menu start with MC
+# activate menu
 mode=default
 type=key
 data=F4
-event=Mode MC
+event=Mode Navi1
 
 
 # ========================================================================
@@ -148,6 +148,7 @@ location=1
 mode=MC
 type=key
 data=UP
+event=MacCready show
 event=MacCready up
 label=MC +
 location=3
@@ -155,6 +156,7 @@ location=3
 mode=MC
 type=key
 data=DOWN
+event=MacCready show
 event=MacCready down
 label=MC -
 location=4
