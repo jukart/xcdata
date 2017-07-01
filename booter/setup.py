@@ -53,7 +53,7 @@ settings = {
         },
         "copy": {
             "default.prf": "profiles/minimal-aat.prf",
-            "Default.tsk": None  # "tasks/aac-2017-offen-day5.tsk",
+            "Default.tsk": "tasks/stm-2017-day1.tsk",
         },
     },
     "aac-2017-speed": {
