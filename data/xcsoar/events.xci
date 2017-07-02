@@ -314,16 +314,16 @@ location=1
 
 mode=Navi1
 type=key
-data=UP
-event=AdjustWaypoint previousarm
-label=$(WaypointPreviousArm)
+data=DOWN
+event=AdjustWaypoint nextarm
+label=$(WaypointNextArm)
 location=3
 
 mode=Navi1
 type=key
-data=DOWN
-event=AdjustWaypoint nextarm
-label=$(WaypointNextArm)
+data=UP
+event=AdjustWaypoint previousarm
+label=$(WaypointPreviousArm)
 location=4
 
 mode=Navi1
@@ -345,10 +345,18 @@ location=6
 mode=Navi1
 type=key
 data=F4
-event=WaypointDetails select
+event=Setup Target
 event=Mode default
-label=Waypoint\nList$(CheckWaypointFile)
+label=Target$(CheckTask)$(CheckTaskResumed)
 location=7
+
+#mode=Navi1
+#type=key
+#data=F4
+#event=WaypointDetails select
+#event=Mode default
+#label=Waypoint\nList$(CheckWaypointFile)
+#location=7
 
 mode=Navi1
 type=key
