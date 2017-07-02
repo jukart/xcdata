@@ -12,6 +12,8 @@ import setup
 sysInfo = os.uname()
 DEVELOPING = 'jukart' in sysInfo[1]
 
+XCSOAR_BASE = os.path.expanduser('~/.xcsoar')
+
 if DEVELOPING:
     if 'Virtual' in sysInfo[1]:
         XCSOAR_BIN = os.path.expanduser(
@@ -19,11 +21,10 @@ if DEVELOPING:
         )
     else:
         XCSOAR_BIN = '/Applications/XCSoar.app/Contents/MacOS/xcsoar'
-    XCSOAR_BASE = os.path.expanduser('~/XCSoarData')
+        XCSOAR_BASE = os.path.expanduser('~/XCSoarData')
     USB_PATH = os.path.expanduser('~/XCSoarUSB')
 else:
     XCSOAR_BIN = 'xcsoar'
-    XCSOAR_BASE = os.path.expanduser('~/.xcsoar')
     USB_PATH = '/mnt/usb'
 
 USB_SETTINGS_PATH = os.path.join(USB_PATH, 'settings')
