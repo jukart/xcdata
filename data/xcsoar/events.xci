@@ -314,14 +314,14 @@ location=1
 
 mode=Navi1
 type=key
-data=DOWN
+data=UP
 event=AdjustWaypoint nextarm
 label=$(WaypointNextArm)
 location=3
 
 mode=Navi1
 type=key
-data=UP
+data=DOWN
 event=AdjustWaypoint previousarm
 label=$(WaypointPreviousArm)
 location=4
