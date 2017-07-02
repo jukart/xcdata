@@ -10,7 +10,7 @@ import setup
 
 
 sysInfo = os.uname()
-DEVELOPING = sysInfo[0] == 'Darwin'
+DEVELOPING = 'jukart' in sysInfo[1]
 
 if DEVELOPING:
     XCSOAR_BASE = os.path.expanduser('~/XCSoarData')
