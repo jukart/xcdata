@@ -1,0 +1,44 @@
+<Task fai_finish="0" finish_min_height_ref="AGL" finish_min_height="0" start_max_height_ref="AGL" start_max_height="0" start_max_speed="0" start_requires_arm="0" aat_min_time="12600" type="AAT">
+	<Point type="Start">
+		<Waypoint altitude="860" comment="" id="4" name="001Mariazell LOGM">
+			<Location latitude="47.7895" longitude="15.3003"/>
+		</Waypoint>
+		<ObservationZone length="10000" type="Line"/>
+	</Point>
+	<Point type="Area">
+		<Waypoint altitude="704" comment="" id="45" name="042Kapellen Murzuschlag">
+			<Location latitude="47.65" longitude="15.6178"/>
+		</Waypoint>
+		<ObservationZone radius="15000" type="Cylinder"/>
+	</Point>
+	<Point type="Area">
+		<Waypoint altitude="552" comment="" id="89" name="086St Johann2Pongau">
+			<Location latitude="47.3833" longitude="13.2203"/>
+		</Waypoint>
+		<ObservationZone radius="40000" type="Cylinder"/>
+	</Point>
+	<Point type="Area">
+		<Waypoint altitude="752" comment="" id="107" name="104Gusswerk">
+			<Location latitude="47.742" longitude="15.3064"/>
+		</Waypoint>
+		<ObservationZone radius="5000" type="Cylinder"/>
+	</Point>
+	<Point type="Area">
+		<Waypoint altitude="1015" comment="" id="10" name="007Josefsberg">
+			<Location latitude="47.8446" longitude="15.3132"/>
+		</Waypoint>
+		<ObservationZone radius="3000" type="Cylinder"/>
+	</Point>
+	<Point type="Area">
+		<Waypoint altitude="870" comment="" id="124" name="121Mariazell Kirche">
+			<Location latitude="47.7727" longitude="15.3187"/>
+		</Waypoint>
+		<ObservationZone radius="500" type="Cylinder"/>
+	</Point>
+	<Point type="Finish">
+		<Waypoint altitude="854" comment="" id="5" name="002ZL33">
+			<Location latitude="47.7875" longitude="15.3025"/>
+		</Waypoint>
+		<ObservationZone length="500" type="Line"/>
+	</Point>
+</Task>
