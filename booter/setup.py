@@ -18,25 +18,25 @@ settings = {
             "Default.tsk": None,
         },
     },
-    #"stm-2017-speed": {
-    #    "links": {
-    #        "data/airspace1.txt": "airspaces/ssm2017-2_openair.txt",
-    #        "data/airspace2.txt": None,
-    #        "data/airfields.txt": None,
-    #        "data/waypoint1.cup": "waypoints/WP-ssm-2017-6.cup",
-    #        "data/waypoint2.cup": "waypoints/Austria.cup",
-    #        "data/watched.cup": None,
-    #        "data/map.xcm": "maps/ALPS_HighRes.xcm",
-    #        "data/checklist.txt": "checklists/loih.txt",
-    #        "data/events.xci": "xcsoar/events.xci",
-    #        "data/plane.xcp": "planes/D-5461-18m.xcp",
-    #        "data/tasks": "tasks",
-    #    },
-    #    "copy": {
-    #        "default.prf": "profiles/minimal-speed.prf",
-    #        "Default.tsk": "tasks/stm-2017-day3.tsk",
-    #    },
-    #},
+    "stm-2017-speed": {
+        "links": {
+            "data/airspace1.txt": "airspaces/ssm2017-2_openair.txt",
+            "data/airspace2.txt": None,
+            "data/airfields.txt": None,
+            "data/waypoint1.cup": "waypoints/WP-ssm-2017-6.cup",
+            "data/waypoint2.cup": "waypoints/Austria.cup",
+            "data/watched.cup": None,
+            "data/map.xcm": "maps/ALPS_HighRes.xcm",
+            "data/checklist.txt": "checklists/loih.txt",
+            "data/events.xci": "xcsoar/events.xci",
+            "data/plane.xcp": "planes/D-5461-18m.xcp",
+            "data/tasks": "tasks",
+        },
+        "copy": {
+            "default.prf": "profiles/minimal-speed.prf",
+            "Default.tsk": "tasks/stm-2017-day5.tsk",
+        },
+    },
     "stm-2017-aat": {
         "links": {
             "data/airspace1.txt": "airspaces/ssm2017-2_openair.txt",
