@@ -10,12 +10,13 @@ import setup
 
 
 sysInfo = os.uname()
+
 DEVELOPING = 'jukart' in sysInfo[1]
 
 XCSOAR_BASE = os.path.expanduser('~/.xcsoar')
 
 if DEVELOPING:
-    if 'Virtual' in sysInfo[1]:
+    if 'Ubuntu' in sysInfo[3]:
         XCSOAR_BIN = os.path.expanduser(
             '~/projects/XCSoar/output/UNIX/bin/xcsoar',
         )
