@@ -9,7 +9,8 @@ from ipdetect import get_ip_address
 
 def runXCSoar(*params):
     if settings.DEVELOPING:
-        pars = [settings.XCSOAR_BIN, '-1024x600']
+        # pars = [settings.XCSOAR_BIN, '-1024x600']
+        pars = [settings.XCSOAR_BIN, '-2048x1200']
     else:
         pars = ['xcsoar']
     pars.append('-profile=default.prf')
