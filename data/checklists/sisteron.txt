@@ -39,33 +39,10 @@ Helfer bringt Kuller weg
 
 Nach dem Anrollen Wölbklappen auf 1
 
-[Innsbruck]
-ATIS  126.02 MHz
-Tower 120.10 MHz
-Radar 119.27 MHz
-Segelflug Frequenz Innbruck 123.400 MHz
-VOLMET 130.47 MHz
-
-[INSBRUCK FREIGABEN]
-INNSBRUCK RADAR, D - 5461
-
-D - 5461 POSITION HÖHE
-ERBITTE FREIGABE FÜR DURCHFLUG DURCH KONTROLLZONE
-
-WEST:
-HOHE MUNDE - REITERSPITZE
-
-OST Talquerung:
-BETTELWURF - KELLERJOCH
-HOCHNISSL - KELLERJOCH
-
-[FIS]
-FIS-AT 124.40 Mhz
-
 [Sisteron]
 Sisteron 120.05 Mhz
 
-Pistenrichtungen: ?? / ??
+Pistenrichtungen: 17 / 35
 
 Meldepunkte (1100m) :
  - ???

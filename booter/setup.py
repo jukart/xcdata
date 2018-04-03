@@ -1,4 +1,23 @@
 settings = {
+    "sisteron": {
+        "links": {
+            "data/airspace1.txt": "airspaces/france.txt",
+            "data/airspace2.txt": None,
+            "data/airfields.txt": None,
+            "data/waypoint1.cup": "waypoints/France.cup",
+            "data/waypoint2.cup": None,  # "waypoints/ofm.cup",
+            "data/watched.cup": None,
+            "data/map.xcm": "maps/ALPS_HighRes.xcm",
+            "data/checklist.txt": "checklists/sisteron.txt",
+            "data/events.xci": "xcsoar/events.xci",
+            "data/plane.xcp": "planes/D-5461-18m.xcp",
+            "data/tasks": "tasks",
+        },
+        "copy": {
+            "default.prf": "profiles/speed.prf",
+            "Default.tsk": None,
+        },
+    },
     "_loih": {
         "links": {
             "data/airspace1.txt": "airspaces/lovv.desktop.strepla.openair.txt",
