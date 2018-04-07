@@ -14,7 +14,7 @@ settings = {
             "data/tasks": "tasks",
         },
         "copy": {
-            "default.prf": "profiles/speed.prf",
+            "default.prf": "profiles/sisteron.prf",
             "Default.tsk": None,
         },
     },
