@@ -10,7 +10,7 @@ settings = {
             "data/map.xcm": "maps/ALPS_HighRes.xcm",
             "data/checklist.txt": "checklists/sisteron.txt",
             "data/events.xci": "xcsoar/events.xci",
-            "data/plane.xcp": "planes/D-5461-18m.xcp",
+            "data/plane.xcp": "planes/D-5461-18M.xcp",
             "data/tasks": "tasks",
         },
         "copy": {
@@ -20,16 +20,16 @@ settings = {
     },
     "_loih": {
         "links": {
-            "data/airspace1.txt": "airspaces/lovv.desktop.strepla.openair.txt",
+            "data/airspace1.txt": "ofm/openair_lo/embedded/lovv.desktop.strepla.openair.txt",
             "data/airspace2.txt": None,
             "data/airfields.txt": None,
-            "data/waypoint1.cup": "waypoints/ofm.cup",
-            "data/waypoint2.cup": "waypoints/Austria.cup",
+            "data/waypoint1.cup": "ofm/cup_austria/embedded/ofm.cup",
+            "data/waypoint2.cup": "waypoints/jukart.cup",
             "data/watched.cup": None,
             "data/map.xcm": "maps/ALPS_HighRes.xcm",
             "data/checklist.txt": "checklists/loih.txt",
             "data/events.xci": "xcsoar/events.xci",
-            "data/plane.xcp": "planes/D-5461-18m.xcp",
+            "data/plane.xcp": "planes/D-5461-18M.xcp",
             "data/tasks": "tasks",
         },
         "copy": {
@@ -48,7 +48,7 @@ settings = {
             "data/map.xcm": "maps/ALPS_HighRes.xcm",
             "data/checklist.txt": "checklists/loih.txt",
             "data/events.xci": "xcsoar/events.xci",
-            "data/plane.xcp": "planes/D-5461-18m.xcp",
+            "data/plane.xcp": "planes/D-5461-18M.xcp",
             "data/tasks": "tasks",
         },
         "copy": {
@@ -67,7 +67,7 @@ settings = {
             "data/map.xcm": "maps/ALPS_HighRes.xcm",
             "data/checklist.txt": "checklists/loih.txt",
             "data/events.xci": "xcsoar/events.xci",
-            "data/plane.xcp": "planes/D-5461-18m.xcp",
+            "data/plane.xcp": "planes/D-5461-18M.xcp",
             "data/tasks": "tasks",
         },
         "copy": {
@@ -86,7 +86,7 @@ settings = {
     #        "data/map.xcm": "maps/ALPS_HighRes.xcm",
     #        "data/checklist.txt": "checklists/loih.txt",
     #        "data/events.xci": "xcsoar/events.xci",
-    #        "data/plane.xcp": "planes/D-5461-18m.xcp",
+    #        "data/plane.xcp": "planes/D-5461-18M.xcp",
     #        "data/tasks": "tasks",
     #    },
     #    "copy": {
@@ -105,7 +105,7 @@ settings = {
     #        "data/map.xcm": "maps/ALPS_HighRes.xcm",
     #        "data/checklist.txt": "checklists/loih.txt",
     #        "data/events.xci": "xcsoar/events.xci",
-    #        "data/plane.xcp": "planes/D-5461-18m.xcp",
+    #        "data/plane.xcp": "planes/D-5461-18M.xcp",
     #        "data/tasks": "tasks",
     #    },
     #    "copy": {
@@ -124,7 +124,7 @@ settings = {
     #        "data/map.xcm": "maps/ALPS_HighRes.xcm",
     #        "data/checklist.txt": "checklists/loih.txt",
     #        "data/events.xci": "xcsoar/events_aac.xci",
-    #        "data/plane.xcp": "planes/D-5461-18m.xcp",
+    #        "data/plane.xcp": "planes/D-5461-18M.xcp",
     #        "data/tasks": "tasks",
     #    },
     #    "copy": {
@@ -143,7 +143,7 @@ settings = {
     #        "data/map.xcm": "maps/ALPS_HighRes.xcm",
     #        "data/checklist.txt": "checklists/loih.txt",
     #        "data/events.xci": "xcsoar/events_aac.xci",
-    #        "data/plane.xcp": "planes/D-5461-18m.xcp",
+    #        "data/plane.xcp": "planes/D-5461-18M.xcp",
     #        "data/tasks": "tasks",
     #    },
     #    "copy": {
