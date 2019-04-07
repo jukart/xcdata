@@ -37,6 +37,25 @@ settings = {
             "Default.tsk": None,
         },
     },
+    "feldkirchen": {
+        "links": {
+            "data/airspace1.txt": "ofm/openair_lo/embedded/lovv.desktop.strepla.openair.txt",
+            "data/airspace2.txt": None,
+            "data/airfields.txt": None,
+            "data/waypoint1.cup": "ofm/cup_austria/embedded/ofm.cup",
+            "data/waypoint2.cup": "waypoints/jukart.cup",
+            "data/watched.cup": None,
+            "data/map.xcm": "maps/ALPS_HighRes.xcm",
+            "data/checklist.txt": "checklists/loih.txt",
+            "data/events.xci": "xcsoar/events.xci",
+            "data/plane.xcp": "planes/D-5461-18M.xcp",
+            "data/tasks": "tasks",
+        },
+        "copy": {
+            "default.prf": "profiles/fledkirchen.prf",
+            "Default.tsk": None,
+        },
+    },
     "_loih_old": {
         "links": {
             "data/airspace1.txt": "airspaces/lovv.desktop.strepla.openair.txt",
