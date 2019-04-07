@@ -52,7 +52,7 @@ settings = {
             "data/tasks": "tasks",
         },
         "copy": {
-            "default.prf": "profiles/fledkirchen.prf",
+            "default.prf": "profiles/feldkirchen.prf",
             "Default.tsk": None,
         },
     },
