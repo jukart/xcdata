@@ -33,7 +33,7 @@ settings = {
             "data/tasks": "tasks",
         },
         "copy": {
-            "default.prf": "profiles/loih_new.prf",
+            "default.prf": "profiles/speed.prf",
             "Default.tsk": None,
         },
     },
