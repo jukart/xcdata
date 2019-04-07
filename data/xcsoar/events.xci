@@ -919,6 +919,7 @@ location=5
 # mode=RemoteStick
 # -------------
 
+# row 1
 mode=RemoteStick
 type=key
 data=0
@@ -959,13 +960,14 @@ event=TerrainTopography terrain toggle
 label=Terrain\n$(TerrainToggleActionName)
 location=4
 
+# row 2
+
 mode=RemoteStick
 type=key
 data=0
 event=TerrainTopography topography toggle
 label=Topo.\n$(TopographyToggleActionName)
 location=5
-
 
 mode=RemoteStick
 type=key
@@ -999,6 +1001,7 @@ event=Mode default
 label=Setup\nSystem
 location=9
 
+# row 3
 
 mode=RemoteStick
 type=key
@@ -1024,7 +1027,6 @@ event=Mode default
 label=Target$(CheckTask)$(CheckTaskResumed)
 location=12
 
-
 mode=RemoteStick
 type=key
 data=0
@@ -1033,7 +1035,6 @@ event=Zoom auto toggle
 label=Zoom\n$(ZoomAutoToggleActionName)
 location=13
 
-
 mode=RemoteStick
 type=key
 data=0
@@ -1041,6 +1042,8 @@ event=WaypointDetails select
 event=Mode default
 label=Waypoint\nList$(CheckWaypointFile)
 location=14
+
+# row 4
 
 mode=RemoteStick
 type=key
@@ -1061,17 +1064,26 @@ location=16
 mode=RemoteStick
 type=key
 data=0
+event=Checklist
+event=Mode default
+label=Check\nlist
+location=17
+
+mode=RemoteStick
+type=key
+data=0
 event=AdjustWaypoint previousarm
 label=$(WaypointPreviousArm)
-location=17
+location=18
 
 mode=RemoteStick
 type=key
 data=0
 event=AdjustWaypoint nextarm
 label=$(WaypointNextArm)
-location=18
+location=19
 
+# row 4
 
 mode=RemoteStick
 type=key
@@ -1112,6 +1124,8 @@ event=Mode default
 label=Setup Plane
 location=24
 
+# row 5
+
 mode=RemoteStick
 type=key
 data=0
@@ -1138,18 +1152,12 @@ location=27
 mode=RemoteStick
 type=key
 data=0
-event=Checklist
-event=Mode default
-label=Check\nlist
-location=28
-
-mode=RemoteStick
-type=key
-data=0
 event=Analysis
 event=Mode default
 label=Analysis
-location=29
+location=28
+
+# row 5
 
 mode=RemoteStick
 type=key
@@ -1157,6 +1165,13 @@ data=0
 event=Status all
 event=Mode default
 label=Status
+location=29
+
+mode=RemoteStick
+type=key
+data=0
+event=Mode Navi1
+label=Nav
 location=30
 
 #mode=RemoteStick
@@ -1165,11 +1180,4 @@ location=30
 #event=ThermalAssistant
 #event=Mode default
 #label=Thermal Assistant$(CheckCircling)
-#location=31
-
-mode=RemoteStick
-type=key
-data=0
-event=Mode Navi1
-label=Nav
-location=31
+#location=30
